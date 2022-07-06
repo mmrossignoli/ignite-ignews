@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SignInButton } from "../SignInButton";
 import styles from "./styles.module.scss";
 export function Header() {
   return (
@@ -11,9 +12,12 @@ export function Header() {
           height={30.27}
         />
         <nav>
-          <a className={styles.active} href="">Home</a>
+          <a className={styles.active} href="">
+            Home
+          </a>
           <a href="">Posts</a>
         </nav>
+        <SignInButton />
       </div>
     </header>
   );
