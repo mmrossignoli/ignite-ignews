@@ -5,7 +5,7 @@ import { ActiveLink } from "../ActiveLink";
 import { SignInButton } from "../SignInButton";
 import styles from "./styles.module.scss";
 export function Header() {
-  const {asPath} = useRouter()
+  
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
@@ -16,10 +16,10 @@ export function Header() {
           height={30.27}
         />
         <nav>
-          <ActiveLink href="/"  activeClassName={styles.active} prefetch>
+          <ActiveLink href="/"  activeClassName={styles.active}>
           <a>Home</a>
           </ActiveLink>
-          <ActiveLink activeClassName={styles.active} href="/posts" prefetch>
+          <ActiveLink activeClassName={styles.active} href="/posts">
           <a >Posts</a>
           </ActiveLink>
         </nav>

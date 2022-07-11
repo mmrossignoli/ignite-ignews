@@ -17,11 +17,11 @@ interface PostProps{
 }
 
 export default function Post({post}:PostProps) {
-  console.log(post)
+  
   return(
     <>
     <Head>
-      <title>{post.title[0].text as string} | Ignews</title>
+      <title>Ignews</title>
     </Head>
     <main className={styles.container}>
       <article className={styles.post}> 
@@ -37,6 +37,16 @@ export default function Post({post}:PostProps) {
 }
 export const getServerSideProps:GetServerSideProps= async ({req, preview = false, previewData,params})=> {
   const session = await getSession({req}) 
+  console.log(session)
+if(!session?.activeSubscription){
+  return {
+    redirect:{
+      destination:'/',
+      permanent:false
+    }
+  }
+}
+
   const client = createClient({ accessToken: process.env.PRISMIC_ACCESS_TOKEN });
 
   const response = await client.getByUID('publication',String(params?.slug))
