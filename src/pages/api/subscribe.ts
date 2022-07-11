@@ -16,7 +16,7 @@ type User = {
 
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse)  {
-  console.log("request method:",req.method)
+  
   if(req.method ==="POST"){
     const session = await getSession({ req });
     if(session?.user?.email){

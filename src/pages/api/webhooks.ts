@@ -34,17 +34,16 @@ export default async function webhooks(req:NextApiRequest, res:NextApiResponse) 
     event = stripe.webhooks.constructEvent(buf, secret, process.env.STRIPE_WEBHOOK_SECRET!)
 
   } catch (err:any) {
-    console.log(err)
+    
     return res.status(400).send(`Webhook Error: ${err.message}`)
   }
   const type = event.type;
-  console.log(type)
+  
   if(relevantEvents.has(type)){
     try{
     switch(type){
       case 'customer.subscription.updated':
       case 'customer.subscription.deleted':  
-      console.log("delete:",type)
         const subscription = event.data.object as Stripe.Subscription
         await saveSubscription(
           subscription.id, 

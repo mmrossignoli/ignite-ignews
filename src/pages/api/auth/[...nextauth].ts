@@ -71,7 +71,7 @@ export default NextAuth({
           )
         )
       )
-      console.log(query)
+    
       return true
     }catch(e){
       return true
