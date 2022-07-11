@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 import { createClient } from '../../../prismicio'
 import { PrismicText   } from '@prismicio/react';
 import * as prismicT from '@prismicio/types';
+import Link from 'next/link';
 type Post ={
   title: prismicT.RichTextField
   excerpt: {
@@ -21,7 +22,6 @@ interface PostsProps{
   posts:Post[]
 }
 export default function Posts( { posts } :PostsProps) {
-  console.log(posts);
   return (
     <>
     <Head>
@@ -30,11 +30,13 @@ export default function Posts( { posts } :PostsProps) {
     <main className={styles.container}>
       <div className={styles.posts}>
         {posts.map(post => (
-          <a href={post.slug} key={post.slug}>
+          <Link href={`/posts/${post.slug}`} key={post.slug}>
+          <a>
             <time>{post.updatedAt}</time>
             <strong><PrismicText field={post.title}/></strong>
             <p>{post.excerpt.postExcerpt.text}</p>
             </a>
+            </Link>
         ))}
       </div>
     </main>

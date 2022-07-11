@@ -11,7 +11,9 @@ export function linkResolver(doc) {
     case 'homepage':
       return '/'
     case 'posts':
-      return `/posts/${doc.uid}`
+      return `/posts/`
+    case '/posts/[slug]':
+        return `/posts/${doc.uid}`
     default:
       return null
   }
