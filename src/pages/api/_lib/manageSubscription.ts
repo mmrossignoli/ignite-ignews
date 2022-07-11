@@ -14,6 +14,7 @@ type User = {
 export async function saveSubscription(
   subscriptionId:string ,
   customerId:string,
+  createAction = false,
 ){
   const userRef = await fauna.query<User>(
     q.Select(
@@ -34,7 +35,7 @@ export async function saveSubscription(
     price_id: subscription.items.data[0].price.id,
 
   }
-
+if (createAction){
   const query = await fauna.query(
     q.Create(
       q.Collection('subscriptions'),
@@ -42,4 +43,22 @@ export async function saveSubscription(
     )
   ) 
   console.log(query) 
+    }else{
+      console.log("update/deleted")
+      const query = await fauna.query(
+        q.Replace(
+          q.Select(
+            "ref",
+            q.Get(
+              q.Match(
+                q.Index('subscription_by_id'),
+                subscriptionId
+              )
+            )
+          ),
+          {data:subscriptionData}
+        )
+      )
+      console.log(query)
+    }
 }
